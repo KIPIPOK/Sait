@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основные финансовые показатели</title>
+    <link rel="stylesheet" href="main.css">
+    <script>
+      let day = ['18.05.2023', '19.05.2023','22.05.2023','23.05.2023','24.05.2023','25.05.2023','26.05.2023','29.05.2023','30.05.2023','31.05.2023'];
+      let value = [10.18, 10.06, 9.88, 9.96, 10.02, 10.16, 10.28, 10.8, 10.38, 10.26]; 
+      function tableFilling() {
+            let table = document.getElementById('pricetable');
+    
+          for (i = 0; i < day.length; i++) {
+            let row = document.createElement('tr');
+            let dayCell = document.createElement('td');
+            dayCell.innerHTML = day[i];
+            table.appendChild(row);
+            row.appendChild(dayCell);
+    
+            let valueCell = document.createElement('td');
+            valueCell.innerHTML = value[i];
+            row.appendChild(valueCell);
+        }
+        }
+        
+          
+        
+    
+        function Caluculating() {
+          
+          let minDiv = (Math.min(...value));
+          document.getElementById('min').innerHTML = 'Минимальное значение: '+ minDiv;
+          let maxDiv = (Math.max(...value));
+          document.getElementById('max').innerHTML = 'Максимальное значение: '+ maxDiv;
+    
+          let summ = 0;
+          for (let i = 0; i < value.length; i++) {
+            summ = summ + value[i];
+          }
+
+          const mean = value.reduce((acc, val) => acc + val) / value.length;
+          const variance = value.reduce((acc, val) => acc + (val - mean) ** 2, 0) / value.length;
+          const stdDev = Math.sqrt(variance);
+
+          document.getElementById('std-dev').textContent = 'Среднеквадратическое отклонение цены: ' + stdDev.toFixed(2);
+        }
+    
+        tableFilling();
+        Caluculating();
+
+    </script>
+</head>
+<body>
+    <img class="logotip" src="logotip.png" width="15%">
+    <header>
+      <b>Центр международной торговли Москвы (ЦМТ)</b>
+      <div class "buttons">
+        <button class="button"><a href='STR1.html'>О компании</a></button>
+        <button class="button"><a href='STR2.html'>Основные финансовые показатели</a></button>
+        <button class="button"><a href='STR3.html'>Контактные данные</a></button>
+        <button class="button"><a href='STR4.html'>Видео</a></button>
+    </div>
+    </header>
+    <main>
+    
+    <h1>Основные финансовые показатели</h1><br>
+    <div>
+        <div>Капитализация на конец апреля: 11 111, 58 млн рублей</div> 
+        <div>Общее число акций: 1083 млн штук</div> 
+    </div>
+    <div>
+      <button onclick="tableFilling(), onclick=Caluculating()">Рассчитать</button>
+      <table id="pricetable" border="1" width="50%" margin="auto"></table> 
+      <div id="min"></div>
+      <div id="max"></div>
+      <div class="tradingVolume"><span id="std-dev"></span></div><br>
+    </div>
+    </main>
+    <footer><hr>Почта: servino@wtcmoscow.ru</footer>
+    
+</body>
+</html>
